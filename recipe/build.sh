@@ -9,6 +9,7 @@ if [[ ${target_platform} == "linux-aarch64" || ${target_platform} == "linux-ppc6
 fi
 
 export CFLAGS="${CFLAGS} -Wno-int-conversion"
+autoreconf --force --verbose --install
 ./configure --prefix=$PREFIX \
     --enable-shared \
     --disable-static

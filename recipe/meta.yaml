@@ -18,6 +18,9 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ stdlib('c') }}
+    - autoconf
+    - automake
+    - gettext-tools
     - make
 
 test:
