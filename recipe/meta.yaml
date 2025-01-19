@@ -1,37 +1,34 @@
-{% set name = "libsigsegv" %}
-{% set version = "2.13" %}
-{% set sha256 = "be78ee4176b05f7c75ff03298d84874db90f4b6c9d5503f0da1226b3a3c48119" %}
+{% set version = "2.14" %}
 
 package:
-  name: {{ name|lower }}
+  name: libsigsegv
   version: {{ version }}
 
 source:
-  url: https://ftp.gnu.org/gnu/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  url: https://ftp.gnu.org/gnu/libsigsegv/libsigsegv-{{ version }}.tar.gz
+  sha256: cdac3941803364cf81a908499beb79c200ead60b6b5b40cad124fd1e06caa295
 
 build:
   number: 0
-  skip: true  # [not linux]
+  skip: true  # [win]
   run_exports:
     - {{ pin_subpackage('libsigsegv', max_pin='x.x') }}
 
 requirements:
   build:
     - {{ compiler('c') }}
-  host:
-  run:
+    - {{ stdlib('c') }}
+    - make
 
 test:
   commands:
+    - test -f ${PREFIX}/lib/libsigsegv${SHLIB_EXT}
 
 about:
   home: https://www.gnu.org/software/libsigsegv/
-  license: GPL-2.0
-  license_family: GPL
+  license: GPL-2.0-or-later
   license_file: COPYING
   summary: GNU libsigsegv is a library for handling page faults in user mode.
-
   description: |
     GNU libsigsegv is a library for handling page faults in user mode.
     A page fault occurs when a program tries to access to a region of
@@ -41,4 +38,5 @@ about:
 
 extra:
   recipe-maintainers:
+    - danielnachun
     - jan-janssen
