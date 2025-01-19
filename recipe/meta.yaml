@@ -22,6 +22,8 @@ requirements:
     - automake
     - gettext-tools
     - make
+  host:
+    - libtool
 
 test:
   commands:
